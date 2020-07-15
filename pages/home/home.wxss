@@ -1,0 +1,14 @@
+.btn{
+  margin-top:20px;
+  font-size: 20px;
+  padding:10px;
+}
+.user-motto:active{
+  color:red
+}
+input {
+  border:1px solid #ccc;
+  padding:5px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px #55ad;
+}
