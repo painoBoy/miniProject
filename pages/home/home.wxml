@@ -1,13 +1,14 @@
 <!--index.wxml-->
-<view class="container">z
-	<view class="usermotto">
-		<text class="user-motto">{{message}}</text>
+<view class="container">
+	<text>{{date}}</text>
+	<view class="usermotto" hover-class="hover-motto" hover-stay-time="0">
+		<image class="user-avatar" src="{{avatar}}"></image>
+		<text class="user-motto">Hello {{message}}</text>
 	</view>
 	<view>
 		<input type="password"></input>
 		<button class="btn" size="mini" bindlongtap="handleLogTap" bindtap="handleClick" type="date">点击</button>
 		<slot name="before"></slot>
-
 	</view>
 	<!-- 引用组件的页面模板 -->
 	<view>
@@ -17,6 +18,10 @@
 			<!-- 这部分内容将被放置在组件 <slot name="after"> 的位置上 -->
 		</component-tag-name>
 	</view>
-	<view wx:for="{{list}}">
+	<view wx:for="{{list}}" wx:key="item">
 		姓名 :{{item.name}}----------------职业:{{item.job}} </view>
+</view>
+
+<view style="margin:30px;">
+	<map show-compass show-scale longitude="103.776935" latitude="30.407864" markers="{{marks}}"></map>
 </view>

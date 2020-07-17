@@ -1,10 +1,17 @@
+const util = require('../../utils/util');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    message: "hello 小程序",
+    date:util.formatTime(new Date()) ,
+    intelval:null,
+    marks:[
+    
+    ],
+    avatar:"https://lh3.googleusercontent.com/ogw/ADGmqu9ie2NqA2m48LZgfy09f0jFgW1wRr1MU1TfJsho=s32-c-mo",
+    message: "小程序",
     list: [{
         name: "提莫",
         job: "上单"
@@ -23,10 +30,27 @@ Page({
       }
     ]
   },
+  error(e) {
+    console.log(e.detail)
+  },
   handleClick() {
-    this.setData({
-      message: "hello Norman"
+    wx.getSetting({
+      withSubscriptions: true,
+      success:res => {
+        //判断用户是否授权
+        if(res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: res =>{
+              this.setData({
+                message : res.userInfo.nickName,
+                avatar:res.userInfo.avatarUrl    
+              })
+            }
+          })
+        }
+      }
     })
+  
   },
   handleLogTap() {
     console.log(this);
@@ -42,13 +66,22 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+   
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function () { 
+    this.setData({
+      date:util.formatTime(new Date()) 
+    })
+    this.data.intelval = setInterval(()=>{
+      console.log("计时器");
+      this.setData({
+        date:util.formatTime(new Date())
+      })
+    },1000)
     console.log("页面显示")
   },
 
@@ -57,6 +90,7 @@ Page({
    */
   onHide: function () {
     console.log("页面隐藏")
+    if (!!this.data.intelval)clearInterval(this.data.intelval); 
   },
 
   /**

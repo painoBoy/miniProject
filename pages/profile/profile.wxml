@@ -1,0 +1,4 @@
+<view>
+<image wx:for="{{20}}" bindload="handleLoad" lazy-load show-menu-by-longpress  src="{{imagePath}}"></image>
+<button type="primary" bindtap="handleChoosePhoto">拍照</button>
+</view>
